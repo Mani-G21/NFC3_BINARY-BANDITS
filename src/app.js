@@ -13,7 +13,6 @@ var loginEmail = document.getElementById('loginEmail');
 var loginPass = document.getElementById('loginPass');
 var loginSelect = document.getElementById('loginSelect');
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const loginCard = document.getElementById("loginCard");
     const signUpCard = document.getElementById("signUpCard");
@@ -36,12 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
 document.getElementById('signUpForm').addEventListener('submit', (e) => {
     e.preventDefault();
 });
-
 
 submitLoginButton.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -50,27 +46,39 @@ submitLoginButton.addEventListener('click', async (e) => {
     loginPass = loginPass.value;
     loginSelect = loginSelect.value;
 
-    if(loginEmail == "" || loginSelect == "" || loginPass == ""){
+    if (loginEmail == "" || loginSelect == "" || loginPass == "") {
         console.log("empty");
-    }
-    else{
-        if(loginSelect == "Institute"){
+    } else {
+        if (loginSelect == "Institute") {
             try {
                 const data = await get("http://localhost:5500/institutes");
                 data.forEach(element => {
-                    if (element.insAdminEmail === loginEmail) {
-                        if(element.insAdminPass === loginPass) {
-                            console.log("logged in successfully");
-                        }
+                    if (element.insAdminEmail === loginEmail && element.insAdminPass === loginPass) {
+                        localStorage.setItem('admin', JSON.stringify(element));
+                        location.replace('admin.html');
                     }
+                });
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        } else if (loginSelect == "Teacher") {
+            try {
+                const data = await get("http://localhost:5500/institutes");
+                data.forEach(institute => {
+                    institute.teachers.forEach(teacher => {
+                        if (teacher.email === loginEmail && teacher.password === loginPass) {
+                            localStorage.setItem('teacher', JSON.stringify({ teacher, institute }));
+                            location.replace('teacher.html');
+                        }
+                    });
                 });
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
     }
-    
-})
+});
+
 registerButton.addEventListener('click', async (e) => {
     e.preventDefault();
     if (instituteInput.value == "" || instituteAdminName.value == "" || instituteEmail.value == "" || institutePassword.value == "") {
@@ -99,6 +107,8 @@ registerButton.addEventListener('click', async (e) => {
             } else {
                 await post("http://localhost:5500/institutes", institute);
                 console.log("Institute registered successfully!");
+                localStorage.setItem('admin', JSON.stringify(institute));
+                window.location.href = 'admin.html';
             }
         } catch (error) {
             console.error("Error fetching data:", error);

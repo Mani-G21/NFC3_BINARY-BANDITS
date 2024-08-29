@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>My JavaScript App</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-3 shadow-sm rounded">
+        <div class="container">
+          <a class="navbar-brand fs-3 fw-semibold text-primary" href="#">Welcome</a>
+          <button type="button" class="btn btn-primary" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card me-5">
+            <div class="card-body">
+              <h4 class="card-title">Manage Tutors</h4>
+              <h6 class="card-subtitle mb-5 text-muted">Remove/Modify</h6>
+              <p class="card-text"></p>
+              <table class="table table-hover" id="tutorTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+        
+        <div class="card contact">
+            <div class="contact-form p-4">
+                <h3 class="m-heading">Create Tutor Profile</h3>
+                <form id="tutorForm">
+                  <div class="mb-3">
+                    <label for="exampleInputName1" class="form-label">User name</label>
+                    <input type="text" class="form-control" id="exampleInputName1" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputSurname1" class="form-label">Surname</label>
+                    <input type="text" class="form-control" id="exampleInputSurname1" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const tutorForm = document.getElementById('tutorForm');
+        const tutorTableBody = document.querySelector('#tutorTable tbody');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        let loggedInAdmin = localStorage.getItem('admin');
+        loggedInAdmin = JSON.parse(loggedInAdmin) || {};
+        id = loggedInAdmin.id;
+
+      
+        if (loggedInAdmin.teachers && loggedInAdmin.teachers.length > 0) {
+          loggedInAdmin.teachers.forEach(teacher => {
+            addTeacherToTable(teacher);
+          });
+        }
+
+        tutorForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          const name = document.getElementById('exampleInputName1').value;
+          const surname = document.getElementById('exampleInputSurname1').value;
+          const email = document.getElementById('exampleInputEmail1').value;
+          const password = document.getElementById('exampleInputPassword1').value;
+
+  
+          const teacherId = Math.floor(Math.random() * 100000);
+
+          const teacher = {
+            id: teacherId,
+            name: name,
+            surname: surname,
+            email: email,
+            password: password
+          };
+
+        
+          if (!loggedInAdmin.teachers) {
+            loggedInAdmin.teachers = [];
+          }
+          loggedInAdmin.teachers.push(teacher);
+
+        
+          localStorage.setItem('admin', JSON.stringify(loggedInAdmin));
+
+        
+          addTeacherToTable(teacher);
+
+      
+          tutorForm.reset();
+        });
+
+        tutorTableBody.addEventListener('click', function(event) {
+          if (event.target.classList.contains('btn-close')) {
+            const row = event.target.closest('tr');
+            const teacherId = row.querySelector('th').textContent;
+
+      
+            loggedInAdmin.teachers = loggedInAdmin.teachers.filter(teacher => teacher.id !== parseInt(teacherId));
+            localStorage.setItem('admin', JSON.stringify(loggedInAdmin));
+
+            row.remove();
+          }
+        });
+
+        logoutBtn.addEventListener('click', function() {
+        
+          localStorage.setItem('admin', JSON.stringify(loggedInAdmin));
+          data = put(`http://localhost:5500/institutes/${id}`, loggedInAdmin);         // Redirect to the index.html page
+          window.location.href = 'index.html';
+        });
+        
+        function addTeacherToTable(teacher) {
+          const newRow = document.createElement('tr');
+          newRow.innerHTML = `
+            <th scope="row">${teacher.id}</th>
+            <td>${teacher.name}</td>
+            <td>${teacher.surname}</td>
+            <td>${teacher.email}</td>
+            <td><button type="button" class="btn-close" aria-label="Close"></button></td>
+          `;
+          tutorTableBody.appendChild(newRow);
+        }
+      });
+
+      async function put(url, data){
+        const requestOptions ={
+            method: 'PUT',
+            headers : {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        const response = await fetch(url, requestOptions)
+        if(!response.ok){
+            throw new Error(`Status : ${response.status}`);
+
+        }
+        const resData = await response.json();
+        return resData;
+        
+    }
+
+    </script>
+</body>
+
+</html>

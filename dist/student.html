@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT-HOME</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        .percentage {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+
+        .subject-progress-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .subject-progress-card {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .dashboard-section {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .dashboard-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .notification-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .quick-links a {
+            display: block;
+            margin: 5px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .quick-links a:hover {
+            text-decoration: underline;
+        }
+
+        .assignment-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px;
+            position: relative;
+        }
+
+        .assignment-card.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Sticky navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            outline: 0;
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 1.75rem auto;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: .3rem;
+            outline: 0;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .75rem 1.25rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-body {
+            position: relative;
+            flex: 1 1 auto;
+            padding: 1.25rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: .75rem 1.25rem;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" id="homeLink" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="attendanceLink" href="#attendance">Attendance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="assignmentsLink" href="#assignments">Assignments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="plagiarismLink" href="#plagiarism">Plagiarism Check</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="home" class="mx-2 dashboard-section">
+            <h2 class="text-dark display-4 mb-0">Welcome, [Student's Name]</h2>
+            <p class="text-dark fs-3">Here is an overview of your current academic standing and upcoming tasks:</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="notification-card">
+                        <h4 class="card-title">Upcoming Deadlines</h4>
+                        <ul>
+                            <li>Assignment 1 - Due: August 30</li>
+                            <li>Midterm Exam - Date: September 10</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="notification-card">
+                        <h4 class="card-title">Recent Grades</h4>
+                        <ul>
+                            <li>Math - 85%</li>
+                            <li>Science - 90%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="notification-card">
+                        <h4 class="card-title">Announcements</h4>
+                        <p>No new announcements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="attendance" class="mx-2 dashboard-section">
+            <h2 class="text-dark fs-3">Quick Links</h2>
+            <div class="quick-links">
+                <a class="text-black" href="#">View Grades</a>
+                <a class="text-black" href="#">Class Schedule</a>
+                <a class="text-black" href="#">Assignments</a>
+                <a class="text-black" href="#">Campus Resources</a>
+            </div>
+        </div>
+
+        <div id="attendance" class="d-flex justify-content-center align-items-center w-100 mt-5">
+            <div class="card border-dark mx-2 mb-3" style="width: 40%;">
+                <div class="card-header display-5 text-dark">Overall Attendance</div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center" style="position: relative; width: 100%; height: 300px;">
+                        <canvas id="progressBar" width="300" height="300"></canvas>
+                        <div id="percentageDisplay" class="percentage text-dark" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            0%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-dark mb-3 mx-2" style="width: 40%;">
+                <div class="card-header fs-2 text-dark">Subject-wise Attendance</div>
+                <div class="card-body">
+                    <div class="subject-progress-container" id="subjectProgressContainer">
+                        <!-- Subject Progress Bars will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="assignments" class="mx-2 dashboard-section">
+            <h2 class="text-dark fs-3">Assignments</h2>
+            <div id="assignmentsContainer">
+                <!-- Assignment Cards will be added here -->
+            </div>
+        </div>
+
+        <div id="plagiarism" class="mx-2 dashboard-section">
+            <h2 class="text-dark fs-3">Plagiarism Checker</h2>
+            <button class="btn btn-primary" id="plagiarismButton">Check for Plagiarism</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="plagiarismModal" tabindex="-1" aria-labelledby="plagiarismModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="plagiarismModalLabel">Plagiarism Checker</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please upload your file to check for plagiarism.</p>
+                    <input type="file" class="form-control" id="fileInput">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle navigation link activation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Show modal on button click
+            const plagiarismButton = document.getElementById('plagiarismButton');
+            plagiarismButton.addEventListener('click', function() {
+                const plagiarismModal = (document.getElementById('plagiarismModal'));
+                plagiarismModal.style.display = 'block';
+                // plagiarismModal.show();
+            });
+
+            // Initialize progress bar and subject progress bars
+            let targetProgress = 75; // Final target progress percentage for overall attendance
+            let currentProgress = 0; // Initial progress value for overall attendance
+            const subjects = [
+                { name: "Math", progress: 85 },
+                { name: "Science", progress: 60 },
+                { name: "History", progress: 75 },
+                { name: "English", progress: 90 }
+            ];
+
+            const assignments = [
+                { name: "Assignment 1", subject: "Math", dueDate: "2024-08-30" },
+                { name: "Assignment 2", subject: "Science", dueDate: "2024-09-05" },
+                { name: "Assignment 3", subject: "History", dueDate: "2024-09-10" },
+                { name: "Assignment 4", subject: "English", dueDate: "2024-08-25" }
+            ];
+
+            const canvas = document.getElementById('progressBar');
+            const ctx = canvas.getContext('2d');
+            const radius = 130;
+            const lineWidth = 20;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const fullCircle = 2 * Math.PI;
+            const speed = 2;
+
+            function drawProgress(progress) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, fullCircle);
+                ctx.strokeStyle = '#e6e6e6';
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+                ctx.closePath();
+
+                const progressAngle = (progress / 100) * fullCircle;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, -0.5 * Math.PI, (-0.5 * Math.PI) + progressAngle);
+                ctx.strokeStyle = '#e95420';
+                ctx.lineWidth = lineWidth;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                ctx.closePath();
+
+                document.getElementById('percentageDisplay').textContent = `${Math.floor(progress)}%`;
+            }
+
+            function animateProgress() {
+                if (currentProgress < targetProgress) {
+                    currentProgress += speed;
+                    if (currentProgress > targetProgress) currentProgress = targetProgress;
+                    drawProgress(currentProgress);
+                    requestAnimationFrame(animateProgress);
+                }
+            }
+
+            function createSubjectProgress(subject) {
+                const container = document.createElement('div');
+                container.classList.add('subject-progress-card');
+
+                const canvas = document.createElement('canvas');
+                canvas.width = 150;
+                canvas.height = 150;
+                container.appendChild(canvas);
+
+                const percentageDisplay = document.createElement('div');
+                percentageDisplay.classList.add('percentage');
+                container.appendChild(percentageDisplay);
+
+                document.getElementById('subjectProgressContainer').appendChild(container);
+
+                const ctx = canvas.getContext('2d');
+                const radius = 60;
+                const lineWidth = 10;
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const fullCircle = 2 * Math.PI;
+
+                function drawSubjectProgress(progress) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, fullCircle);
+                    ctx.strokeStyle = '#e6e6e6';
+                    ctx.lineWidth = lineWidth;
+                    ctx.stroke();
+                    ctx.closePath();
+
+                    const progressAngle = (progress / 100) * fullCircle;
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, -0.5 * Math.PI, (-0.5 * Math.PI) + progressAngle);
+                    ctx.strokeStyle = '#4caf50';
+                    ctx.lineWidth = lineWidth;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                    ctx.closePath();
+
+                    percentageDisplay.textContent = `${subject.name}: ${Math.floor(progress)}%`;
+                }
+
+                drawSubjectProgress(subject.progress);
+            }
+
+            function createAssignmentCard(assignment) {
+                const container = document.getElementById('assignmentsContainer');
+                const card = document.createElement('div');
+                card.classList.add('assignment-card');
+                const today = new Date().toISOString().split('T')[0];
+                const isExpired = new Date(assignment.dueDate) < new Date(today);
+
+                if (isExpired) {
+                    card.classList.add('disabled');
+                }
+
+                card.innerHTML = `
+                    <h4 class="card-title">${assignment.name}</h4>
+                    <p><strong>Subject:</strong> ${assignment.subject}</p>
+                    <p><strong>Due Date:</strong> ${assignment.dueDate}</p>
+                    <button class="btn btn-primary" ${isExpired ? 'disabled' : ''}>Show Grades</button>
+                `;
+                container.appendChild(card);
+            }
+
+            animateProgress();
+            subjects.forEach(createSubjectProgress);
+            assignments.forEach(createAssignmentCard);
+        });
+    </script>
+</body>
+</html>

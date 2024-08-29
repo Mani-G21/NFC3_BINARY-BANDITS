@@ -6,10 +6,44 @@
       "insAdminName": "mani",
       "insAdminEmail": "tsec@gmail.com",
       "insAdminPass": "1234",
+      "teachers": [
+        {
+          "id": 79810,
+          "name": "londi",
+          "surname": "lapat",
+          "email": "souravpatel2@gmail.com",
+          "password": "222222"
+        },
+        {
+          "id": 41741,
+          "name": "londi",
+          "surname": "lapat",
+          "email": "chocamchoc@gmail.com",
+          "password": "wow"
+        }
+      ],
+      "students": []
+    },
+    {
+      "id": "119e",
+      "insName": "VESIT",
+      "insAdminName": "vika",
+      "insAdminEmail": "vesit@gmail.com",
+      "insAdminPass": "abcd",
+      "teachers": [],
+      "students": []
+    },
+    {
+      "id": "f6b7",
+      "insName": "IIT",
+      "insAdminName": "person1",
+      "insAdminEmail": "iit@gmail.com",
+      "insAdminPass": "1234",
       "teachers": [],
       "students": []
     }
   ],
   "students": [],
-  "lectures": []
+  "lectures": [],
+  "teachers": []
 }

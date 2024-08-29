@@ -22,7 +22,15 @@
           "password": "wow"
         }
       ],
-      "students": []
+      "students": [
+        {
+          "name": "saurav beti",
+          "email": "ok@hiren.com",
+          "password": "mainsh",
+          "id": 94700
+        }
+      ],
+      "activeLectureCode": null
     },
     {
       "id": "119e",
@@ -41,9 +49,18 @@
       "insAdminPass": "1234",
       "teachers": [],
       "students": []
+    },
+    {
+      "id": "5c70",
+      "insName": "TSEC",
+      "insAdminName": "londilapat",
+      "insAdminEmail": "abcd1234@gmail.com",
+      "insAdminPass": "abcd1234",
+      "teachers": [],
+      "students": []
     }
   ],
   "students": [],
   "lectures": [],
-  "teachers": []
+  "assignments": []
 }

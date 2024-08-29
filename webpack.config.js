@@ -28,7 +28,7 @@ module.exports = {
             directory: path.join(__dirname, 'dist'),
             watch: true,
         },
-        port: 5500,
+        port: 9000,
         hot: true,
         liveReload: true,
         open: true,

@@ -1,52 +1,15 @@
 {
-  "posts": [
+  "institutes": [
     {
-      "title": "a",
-      "body": "Lorem ipsum",
-      "author": "HT",
-      "id": "1"
-    },
-    {
-      "id": "2",
-      "title": "another title",
-      "body": "Lorem ipsum",
-      "author": "HT"
-    },
-    {
-      "id": "3",
-      "title": "another title",
-      "body": "Lorem ipsum",
-      "author": "HT"
-    },
-    {
-      "title": "hey",
-      "body": "1213123123\n",
-      "author": "2",
-      "id": "6f8e"
-    },
-    {
-      "id": "2d34",
-      "title": "trial",
-      "body": "trial after modal",
-      "author": "123"
-    },
-    {
-      "id": "1c61",
-      "title": "anskdnasd",
-      "body": "alkdsmnl.ad",
-      "author": "alskndlandasdandad"
-    },
-    {
-      "id": "a23e",
-      "title": "s",
-      "body": "s",
-      "author": "s"
-    },
-    {
-      "id": "92c2",
-      "title": "vikas",
-      "body": "lrel",
-      "author": "bruh"
+      "id": "cb6b",
+      "insName": "Tsec",
+      "insAdminName": "mani",
+      "insAdminEmail": "tsec@gmail.com",
+      "insAdminPass": "1234",
+      "teachers": [],
+      "students": []
     }
-  ]
+  ],
+  "students": [],
+  "lectures": []
 }

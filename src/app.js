@@ -76,6 +76,13 @@ submitLoginButton.addEventListener('click', async (e) => {
                 console.error("Error fetching data:", error);
             }
         }
+        else{
+            try {
+                location.replace("student.html");
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
     }
 });
 

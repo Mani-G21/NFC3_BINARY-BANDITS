@@ -224,13 +224,12 @@
                     })
                 });
 
-                // Clear the form after submission
                 createAssignmentForm.reset();
             });
 
             logoutBtn.addEventListener('click', function () {
                 localStorage.removeItem('loggedInUser');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             });
         });
     </script>

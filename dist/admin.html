@@ -137,7 +137,7 @@
         logoutBtn.addEventListener('click', function() {
         
           localStorage.setItem('admin', JSON.stringify(loggedInAdmin));
-          data = put(`http://localhost:5500/institutes/${id}`, loggedInAdmin);         // Redirect to the index.html page
+          data = put(`http://localhost:5500/institutes/${id}`, loggedInAdmin);
           window.location.href = 'index.html';
         });
         

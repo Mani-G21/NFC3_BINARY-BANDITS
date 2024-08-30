@@ -1,62 +1,20 @@
 {
   "institutes": [
     {
-      "id": "cb6b",
-      "insName": "Tsec",
-      "insAdminName": "mani",
+      "id": "2634",
+      "insName": "tsec",
+      "insAdminName": "admin",
       "insAdminEmail": "tsec@gmail.com",
       "insAdminPass": "1234",
       "teachers": [
         {
-          "id": 79810,
-          "name": "londi",
-          "surname": "lapat",
+          "id": 27834,
+          "name": "vikas",
+          "surname": "g",
           "email": "souravpatel2@gmail.com",
-          "password": "222222"
-        },
-        {
-          "id": 41741,
-          "name": "londi",
-          "surname": "lapat",
-          "email": "chocamchoc@gmail.com",
-          "password": "wow"
+          "password": "1234"
         }
       ],
-      "students": [
-        {
-          "name": "saurav beti",
-          "email": "ok@hiren.com",
-          "password": "mainsh",
-          "id": 94700
-        }
-      ],
-      "activeLectureCode": null
-    },
-    {
-      "id": "119e",
-      "insName": "VESIT",
-      "insAdminName": "vika",
-      "insAdminEmail": "vesit@gmail.com",
-      "insAdminPass": "abcd",
-      "teachers": [],
-      "students": []
-    },
-    {
-      "id": "f6b7",
-      "insName": "IIT",
-      "insAdminName": "person1",
-      "insAdminEmail": "iit@gmail.com",
-      "insAdminPass": "1234",
-      "teachers": [],
-      "students": []
-    },
-    {
-      "id": "5c70",
-      "insName": "TSEC",
-      "insAdminName": "londilapat",
-      "insAdminEmail": "abcd1234@gmail.com",
-      "insAdminPass": "abcd1234",
-      "teachers": [],
       "students": []
     }
   ],
